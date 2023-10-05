@@ -1,0 +1,80 @@
+<div class="form">
+  <h2 id="registration">Registration Form</h2>
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <label for="firstName">First Name</label>
+    <input type="text" id="firstName" placeholder="Your name..." formControlName="firstName">
+    <div *ngIf="getNameValidation.invalid && (getNameValidation.dirty || getNameValidation.touched)">
+      <span 
+        class="error-msg"
+        *ngIf="getNameValidation.errors?.['required']"
+      >Name field cannot be empty.</span>
+      <span 
+        class="error-msg"
+        *ngIf="getNameValidation.errors?.['minlength']"
+      >Minimum of 3 characters.</span>
+      <span 
+        class="error-msg"
+        *ngIf="getNameValidation.errors?.['maxlength']"
+      >Maximum of 15 characters.</span>
+    </div>
+
+    <label for="lastName">Last Name</label>
+    <input type="text" id="lastName" placeholder="Your last name..." formControlName="lastName">
+    <div *ngIf="getLastNameValidation.invalid && (getLastNameValidation.dirty || getLastNameValidation.touched)">
+      <span 
+        class="error-msg"
+        *ngIf="getLastNameValidation.errors?.['required']"
+      >Last name field cannot be empty.</span>
+      <span 
+        class="error-msg"
+        *ngIf="getLastNameValidation.errors?.['minlength']"
+      >Minimum of 3 characters.</span>
+      <span 
+        class="error-msg"
+        *ngIf="getLastNameValidation.errors?.['maxlength']"
+      >Maximum of 15 characters.</span>
+    </div>
+
+    <label for="email">Email</label>
+    <input type="email" id="email" placeholder="Your email..." formControlName="email">
+    <div *ngIf="getEmailValidation.invalid && (getEmailValidation.dirty || getEmailValidation.touched)">
+      <span 
+        class="error-msg"
+        *ngIf="getEmailValidation.errors?.['required']"
+      >Email field cannot be empty.</span>
+      <span 
+        class="error-msg"
+        *ngIf="getEmailValidation.errors?.['email']"
+      >Not a valid email.</span>
+    </div>
+
+    <label for="country">Country</label>
+    <select name="country" id="id" formControlName="country">
+      <option value="canada">Canada</option>
+      <option value="usa">USA</option>
+      <option value="mexico">Mexico</option>
+    </select>
+
+    <div class="gender">
+      <label for="gender">Gender:</label>    
+      <input type="radio" id="male" value="male" formControlName="gender">
+      <label for="male">Male</label>
+      <input type="radio" id="female" value="female" formControlName="gender">
+      <label for="female">Female</label>
+      <input type="radio" id="other" value="other" formControlName="gender">
+      <label for="other">Other</label>
+    </div>    
+
+    <label>Hobbies <i>(Optional)</i></label>
+    <div class="form-inline">
+      <label for="sports">Sports</label>
+      <input type="checkbox" id="sports" value="sports" formControlName="hobbies">
+      <label for="movies">Movies</label>
+      <input type="checkbox" id="movies" value="movies" formControlName="hobbies">
+      <label for="music">Music</label>
+      <input type="checkbox" id="music" value="music" formControlName="hobbies">
+    </div>
+
+    <input type="submit" id="btn" value="Submit" [disabled]="userForm.invalid" [ngClass]="userForm.invalid? 'submit disabled' : 'submit'">
+  </form>
+</div>
